@@ -18,7 +18,8 @@
       </span>
     </div>
     <div class="loading" v-if="isloading">
-      <img src="../assets/loading.gif" alt="loading">
+      <!--<img src="../assets/loading.gif" alt="loading">-->
+      <my-loading></my-loading>
     </div>
     <div class="posts" v-if="!isloading">
       <ul>
@@ -52,6 +53,7 @@
 <script>
 
   import Pagination from "./Pagination";
+  import Loading from "./Loading";
 
   export default {
     name: "PostList",
@@ -64,7 +66,8 @@
       }
     },
     components: {
-      Pagination
+      Pagination,
+      "my-loading": Loading
     },
     methods: {
       getData() {
