@@ -1,9 +1,9 @@
 <template>
   <div class="article">
     <div class="loading" v-if="isloading">
-      <img src="../assets/loading.gif">
+      <img src="../assets/loading.gif" alt="loading">
     </div>
-    <div v-else>
+    <div v-if="!isloading">
       <div class="topic_header">
         <div class="topic_title">{{post.title}}</div>
         <div class="changes">
@@ -19,7 +19,7 @@
         <div class="replySec" v-for="(reply,index) in post.replies">
           <div class="replyUp">
             <router-link :to="{name:'user_info',params:{name: reply.author.loginname}}">
-              <img :src="reply.author.avatar_url">
+              <img :src="reply.author.avatar_url" alt="用户头像">
             </router-link>
             <router-link :to="{name:'user_info',params:{name: reply.author.loginname}}">
               <span class="reply_author">{{reply.author.loginname}}</span>
@@ -54,7 +54,7 @@
       getArticleData() {
         this.$http.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
           .then(res => {
-            this.isloading = false
+            this.isloading = false;
             this.post = res.data.success ? res.data.data : this.post
           })
           .catch(err => {
@@ -63,7 +63,7 @@
       }
     },
     beforeMount() {
-      this.isloading = true
+      this.isloading = true;
       this.getArticleData()
     },
     watch: {
@@ -75,7 +75,7 @@
 </script>
 
 <style>
-  @import url('../../node_modules/github-markdown-css');
+  @import url('../assets/github-markdown.css');
 
   #reply .topbar {
     padding: 10px;

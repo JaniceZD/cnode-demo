@@ -66,7 +66,7 @@
     margin-bottom: 6px;
     background-color: white;
     padding: 6px 4px;
-    border-radius: 5px;
+    border-radius: 3px;
     /*box-shadow: 0px 2px 9px #888888;*/
   }
 

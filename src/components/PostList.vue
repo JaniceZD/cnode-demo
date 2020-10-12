@@ -1,9 +1,6 @@
 <template>
   <div class="PostList">
-    <div class="loading" v-if="isloading">
-      <img src="../assets/loading.gif">
-    </div>
-    <div class="topbar" v-else>
+    <div class="topbar">
       <span>
         <router-link :to="{path:'/',query:{tab:'all'}}" class="topic-tab active" exact>全部</router-link>
       </span>
@@ -20,11 +17,14 @@
         <router-link :to="{path:'/',query:{tab:'job'}}" class="topic-tab" exact>招聘</router-link>
       </span>
     </div>
-    <div class="posts">
+    <div class="loading" v-if="isloading">
+      <img src="../assets/loading.gif" alt="loading">
+    </div>
+    <div class="posts" v-if="!isloading">
       <ul>
         <li v-for="post in posts">
           <!--头像-->
-          <img :src="post.author.avatar_url">
+          <img :src="post.author.avatar_url" alt="用户头像">
           <!--回复/浏览-->
           <span class="allcount">
             <span class="reply_count">{{post.reply_count}}</span>/{{post.visit_count}}
@@ -43,11 +43,9 @@
             {{post.last_reply_at | formatDate}}
           </span>
         </li>
-        <li>
-          <Pagination @handleList="renderList"></Pagination>
-        </li>
       </ul>
     </div>
+    <Pagination @handleList="renderList"></Pagination>
   </div>
 </template>
 
@@ -59,7 +57,7 @@
     name: "PostList",
     data() {
       return {
-        isloading: false,
+        isloading: true,
         posts: [],  //代表页面的列表数组
         postPage: 1,
         tab: 'all'
@@ -77,19 +75,19 @@
             limit: 25
           }
         }).then(res => {
-          this.loading = false
+          this.loading = false;
           this.posts = res.data.data
         }).catch(err => {
           console.log(err)
         })
       },
       renderList(value) {
-        this.postPage = value
+        this.postPage = value;
         this.getData()
       }
     },
     beforeMount() {
-      this.loading = true
+      this.loading = true;
       this.getData()
     },
     watch: {
@@ -104,8 +102,17 @@
 
 <style scoped>
   .loading {
-    text-align: center;
-    padding-top: 300px;
+    /*text-align: center;*/
+    /*padding-top: 300px;*/
+    font-size: 16px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius:  0 0 3px 3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
   }
 
   .PostList {
@@ -239,8 +246,4 @@
     text-decoration: underline;
   }
 
-  .loading {
-    text-align: center;
-    padding-top: 300px;
-  }
 </style>
