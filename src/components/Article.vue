@@ -52,7 +52,7 @@
     },
     methods: {
       getArticleData() {
-        this.$http.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
+        this.$http.get(`http://mock.hunger-valley.com/cnode/api/v1/topic/${this.$route.params.id}`)
           .then(res => {
             this.isloading = false;
             this.post = res.data.success ? res.data.data : this.post
@@ -110,10 +110,11 @@
     bottom: -9px;
   }
 
-  #reply a{
+  #reply a {
     font-size: 15px;
     text-decoration: none;
   }
+
   #reply span {
     font-size: 13px;
     color: #666;
@@ -188,7 +189,7 @@
     vertical-align: bottom;
     width: 75%;
     line-height: 130%;
-    font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,sans-serif!important;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, sans-serif !important;
     color: #333;
   }
 

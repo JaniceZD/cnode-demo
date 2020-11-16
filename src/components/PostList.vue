@@ -70,8 +70,9 @@
       "my-loading": Loading
     },
     methods: {
+      /* https://cnodejs.org/api/v1/topics*/
       getData() {
-        this.$http.get('https://cnodejs.org/api/v1/topics', {
+        this.$http.get('http://mock.hunger-valley.com/cnode/api/v1/topics', {
           params: {
             tab: this.tab,
             page: this.postPage,
